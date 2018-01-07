@@ -26,7 +26,6 @@ bool comparator(const T & obj1, const T & obj2){
 template<typename T>
 void printVect(const std::vector<T> & vect){
        for_each(vect.begin(),vect.end(), showVect2<T>);	
-
        std::cout << std::endl;
 }
 
