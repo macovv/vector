@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iterator>
 #include <vector>
 #include <algorithm>
 
@@ -26,17 +27,34 @@ bool comparator(const T & obj1, const T & obj2){
 template<typename T>
 void printVect(const std::vector<T> & vect){
        for_each(vect.begin(),vect.end(), showVect2<T>);	
+
        std::cout << std::endl;
 }
 
 int main(){
 	std::vector<int> vect;
-	for(int i=0;i<10;i++)
+	std::vector<int> vect3;
+
+	 for(int i=0; i<10; i++){
 		vect.push_back(i+11);
+		vect3.push_back(i);
+	}
+	std::vector<int> vect2(vect.size());
+	
 	printVect(vect);
+	printVect(vect3);
 	vect.erase(vect.begin()+7, vect.end());
 	printVect(vect);
-	sort(vect.begin(),vect.end(),comparator<int>);
+
+	sort(vect.begin(), vect.end(), comparator<int>);
 	printVect(vect);
+	
+	copy(vect.rbegin(), vect.rend(), vect2.begin());
+	printVect(vect2);	
+	
+	copy(vect.begin(), vect.begin()+5, std::insert_iterator<std::vector<int>>(vect3,vect3.begin()));
+
+	printVect(vect3);
 	return 0;
 }	
+
